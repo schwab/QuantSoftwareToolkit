@@ -28,7 +28,8 @@ from matplotlib import gridspec
 import matplotlib.dates as mdates
 import cPickle
 import datetime as dt
-import pandas
+import pandas as pd
+pd.TimeSeries = pd.Series
 import numpy as np
 from copy import deepcopy
 import scipy.stats as scst

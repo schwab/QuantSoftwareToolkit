@@ -12,13 +12,15 @@ Created on Jan 1, 2011
 
 '''
 
+import pandas as pd
+pd.TimeSeries = pd.Series
 
 import datetime as dt
 from datetime import timedelta
 import time as t
 import numpy as np
 import os
-import pandas as pd
+
 
 
 def _cache_dates():

@@ -13,7 +13,9 @@ Created on Jan 15, 2013
 '''
 
 import numpy as np
-import pandas as pa
+
+import pandas as pd
+pd.TimeSeries = pd.Series
 import os
 import re
 import csv

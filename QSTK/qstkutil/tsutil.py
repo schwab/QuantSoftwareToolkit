@@ -13,12 +13,14 @@ Created on Jan 1, 2011
 '''
 
 
+import pandas as pd
+pd.TimeSeries = pd.Series
 import math
 import datetime as dt
 import numpy as np
 from QSTK.qstkutil import qsdateutil
 from math import sqrt
-import pandas as pd
+
 from copy import deepcopy
 
 
