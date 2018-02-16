@@ -14,8 +14,8 @@ Created on Jan 15, 2013
 
 import numpy as np
 
-import pandas as pd
-pd.TimeSeries = pd.Series
+import pandas as pa
+pa.TimeSeries = pa.Series
 import os
 import re
 import csv
