@@ -22,19 +22,25 @@ import QSTK.qstkutil.qsdateutil as du
 
 def eventprofiler(df_events_arg, d_data, i_lookback=20, i_lookforward=20,
                 s_filename='study', b_market_neutral=True, b_errorbars=True,
-                s_market_sym='SPY'):
+                s_market_sym='SPY', event_name=""):
     ''' Event Profiler for an event matix'''
     df_close = d_data['close'].copy()
     df_rets = df_close.copy()
 
     # Do not modify the original event dataframe.
+    # ref: https://gist.github.com/tentativafc/731467af76264c6df123#file-homework-py
     df_events = df_events_arg.copy()
     tsu.returnize0(df_rets.values)
 
+    # Disabled to get graphs working
+    #if b_market_neutral == True:
+    #    df_rets = df_rets - df_rets[s_market_sym]
+    #    del df_rets[s_market_sym]
+    #    del df_events[s_market_sym]
+
     if b_market_neutral == True:
-        df_rets = df_rets - df_rets[s_market_sym]
-        del df_rets[s_market_sym]
-        del df_events[s_market_sym]
+        df_rets[s_market_sym] = np.NaN
+        df_events[s_market_sym] = np.NaN
 
     df_close = df_close.reindex(columns=df_events.columns)
 
@@ -80,9 +86,9 @@ def eventprofiler(df_events_arg, d_data, i_lookback=20, i_lookforward=20,
     plt.xlim(-i_lookback - 1, i_lookforward + 1)
     if b_market_neutral == True:
         plt.title('Market Relative mean return of ' +\
-                str(i_no_events) + ' events')
+                str(i_no_events) + ' events ' + event_name)
     else:
-        plt.title('Mean return of ' + str(i_no_events) + ' events')
+        plt.title('Mean return of ' + str(i_no_events) + ' events' + event_name)
     plt.xlabel('Days')
     plt.ylabel('Cumulative Returns')
     plt.savefig(s_filename, format='pdf')
